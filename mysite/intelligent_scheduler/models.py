@@ -15,7 +15,9 @@ class Faculty(Model):
     isvisiting = BooleanField(default=False)
 
 class PreferredFacultyHours(Model):
-    fid = IntegerField()
+    fid = ForeignKey(
+        'Faculty',
+        on_delete=CASCADE)
     preferred_day = CharField(
         max_length=3,
         choices=model_choices['WEEK_DAY'],
@@ -24,11 +26,11 @@ class PreferredFacultyHours(Model):
     endtime = TimeField()
 
 class Rooms(Model):
-    roomid = IntegerField()
+    roomid = IntegerField(primary_key=True)
     max_strength = IntegerField(default=50)
 
 class Student(Model):
-    rollnumber = IntegerField()
+    rollnumber = IntegerField(primary_key=True)
     batch = CharField(
         max_length=4,
         choices=model_choices['BATCH'],
@@ -39,12 +41,20 @@ class Student(Model):
         default='CSE')
 
 class CourseTaken(Model):
-    rollnumber = IntegerField()
-    cid = CharField(max_length=10)
+    rollnumber = ForeignKey(
+        'Student',
+        on_delete=CASCADE)
+    cid = ForeignKey(
+        'Courses',
+        on_delete=CASCADE)
 
 class TeachingAssistant(Model):
-    rollnumber = IntegerField()
-    cid = CharField(max_length=10)
+    rollnumber = ForeignKey(
+        'Student',
+        on_delete=CASCADE)
+    cid = ForeignKey(
+        'Courses',
+        on_delete=CASCADE)
 
 class ClassDuration(Model):
     batch = CharField(
@@ -54,7 +64,9 @@ class ClassDuration(Model):
     duration = DurationField()
 
 class CourseType(Model):
-    cid = CharField(max_length=10)
+    cid = ForeignKey(
+        'Courses',
+        on_delete=CASCADE)
     batch = CharField(
         max_length=4,
         choices=model_choices['BATCH'],
@@ -71,6 +83,7 @@ class LunchBreak(Model):
     batch = CharField(
         max_length=4,
         choices=model_choices['BATCH'],
-        default='UG1')
+        default='UG1',
+        primary_key=True)
     starttime = TimeField()
     endtime = TimeField()
