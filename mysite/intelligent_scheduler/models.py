@@ -3,6 +3,9 @@ from intelligent_scheduler.config import model_choices
 
 class Courses(Model):
     cid = CharField(max_length=10, primary_key=True)
+    fid = ForeignKey(
+        'Faculty',
+        on_delete=CASCADE)
     cname = CharField(max_length=100)
     cshortname = CharField(max_length=6)
     nclasses = IntegerField(default=2)

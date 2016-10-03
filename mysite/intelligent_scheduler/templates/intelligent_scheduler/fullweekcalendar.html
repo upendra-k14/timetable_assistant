@@ -1,0 +1,353 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>IIITS Timetable Assistant</title>
+
+  <link rel='stylesheet' href="{% static 'intelligent_scheduler/fullcalendar/fullcalendar.css' %}" />
+  <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/fullcalendar/lib/cupertino/jquery-ui.min.css' %}"/>
+  <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/bootstrap.min.css' %}" />
+  <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/bootstrap-responsive.min.css' %}" />
+
+  <script src="{% static 'intelligent_scheduler/fullcalendar/lib/jquery.min.js' %}"></script>
+  <script src="{% static 'intelligent_scheduler/fullcalendar/lib/jquery-ui.min.js' %}"></script>
+  <script src="{% static 'intelligent_scheduler/fullcalendar/lib/moment.min.js' %}"></script>
+  <script src="{% static 'intelligent_scheduler/fullcalendar/fullcalendar.min.js' %}"></script>
+  <!--<script type='text/javascript' src="{% static 'intelligent_scheduler/jqueryui/jquery-ui.min.js' %}"></script>-->
+
+  <script type='text/javascript'>
+
+  $(document).ready(function() {
+
+    /* initialize the external events
+	-----------------------------------------------------------------*/
+
+	$('#external-events .fc-event').each(function() {
+
+		// store data so the calendar knows to render an event upon drop
+		$(this).data('event', {
+			title: $.trim($(this).text()), // use the element's text as the event title
+			stick: true // maintain when user navigates (see docs on the renderEvent method)
+		});
+
+		// make the event draggable using jQuery UI
+		$(this).draggable({
+			zIndex: 999,
+			revert: true,      // will cause the event to go back to its
+			revertDuration: 0  //  original position after the drag
+		});
+
+	});
+
+    // page is now ready, initialize the calendar...
+
+    var ug1_calendar = $('#calendar_ug1').fullCalendar({
+        // put your options and callbacks here
+        header: { // Display nothing at the top
+            left: '',
+            center: '',
+            right: ''
+        },
+        theme: true,
+        //aspectRatio: 2.44,
+        //eventSources: ['events.php'],
+        height: 520, // Fix height
+        columnFormat: 'dddd', // Display just full length of weekday, without dates
+        defaultView: 'agendaWeek', // display week view
+        hiddenDays: [0,], // hide Saturday and Sunday
+        weekNumbers:  false, // don't show week numbers
+        minTime: '8:30:00', // display from 16 to
+        maxTime: '19:00:00', // 23
+        slotDuration: '00:30:00', // 15 minutes for each row
+        allDaySlot: false, // don't show "all day" at the top
+        selectable: true,
+        editable: true,
+        defaultDate: '2016-09-12',
+        droppable: true, // this allows things to be dropped onto the calendar
+        selectHelper: true,
+		select: function(start, end) {
+			var title = prompt('Event Title:');
+			var eventData;
+			if (title) {
+				eventData = {
+					title: title,
+					start: start,
+					end: end
+				};
+				$('#calendar_ug1').fullCalendar('renderEvent', eventData, true); // stick? = true
+			}
+			$('#calendar_ug1').fullCalendar('unselect');
+		},
+        //select: function(start, end, allDay) {
+             // Code for creating new events.
+        //     alert("Create new event at " + start);
+        //},
+        eventResize: function( event, delta, revertFunc, jsEvent, ui, view ) {
+             // Code when you resize an event (for example make it two hours longer
+             alert("I just got resized!");
+        },
+        eventDrop: function( event, jsEvent, ui, view ) {
+
+            // Code when you drop an element somewhere else
+            alert("I'm somewhere else now");
+        },
+		drop: function() {
+			// is the "remove after drop" checkbox checked?
+			if ($('#drop-remove').is(':checked')) {
+				// if so, remove the element from the "Draggable Events" list
+				$(this).remove();
+			}
+		}
+        //defaultView : 'agendaSixDay'
+    })
+    //$('#calendar_ug1').fullCalendar('gotoDate', '2000-01-01');
+
+    var ug2_calendar = $('#calendar_ug2').fullCalendar({
+        // put your options and callbacks here
+        header: { // Display nothing at the top
+            left: '',
+            center: '',
+            right: ''
+        },
+        //eventSources: ['events.php'],
+        theme: true,
+        height: 520, // Fix height
+        columnFormat: 'dddd', // Display just full length of weekday, without dates
+        defaultView: 'agendaWeek', // display week view
+        hiddenDays: [0,], // hide Saturday and Sunday
+        weekNumbers:  false, // don't show week numbers
+        minTime: '8:30:00', // display from 16 to
+        maxTime: '19:00:00', // 23
+        slotDuration: '00:30:00', // 15 minutes for each row
+        allDaySlot: false, // don't show "all day" at the top
+        select: function(start, end, allDay) {
+             // Code for creating new events.
+             alert("Create new event at " + start);
+        },
+        eventResize: function( event, delta, revertFunc, jsEvent, ui, view ) {
+             // Code when you resize an event (for example make it two hours longer
+             alert("I just got resized!");
+        },
+        eventDrop: function( event, jsEvent, ui, view ) {
+
+            // Code when you drop an element somewhere else
+            alert("I'm somewhere else now");
+        }
+        //defaultView : 'agendaSixDay'
+    })
+    $('#calendar_ug2').fullCalendar( 'gotoDate', '2000-01-01');
+
+    var ug3_calendar = $('#calendar_ug3').fullCalendar({
+        // put your options and callbacks here
+        header: { // Display nothing at the top
+            left: '',
+            center: '',
+            right: ''
+        },
+        //eventSources: ['events.php'],
+        theme: true,
+        height: 520, // Fix height
+        columnFormat: 'dddd', // Display just full length of weekday, without dates
+        defaultView: 'agendaWeek', // display week view
+        hiddenDays: [0,], // hide Saturday and Sunday
+        weekNumbers:  false, // don't show week numbers
+        minTime: '8:30:00', // display from 16 to
+        maxTime: '19:00:00', // 23
+        slotDuration: '00:30:00', // 15 minutes for each row
+        allDaySlot: false, // don't show "all day" at the top
+        select: function(start, end, allDay) {
+             // Code for creating new events.
+             alert("Create new event at " + start);
+        },
+        eventResize: function( event, delta, revertFunc, jsEvent, ui, view ) {
+             // Code when you resize an event (for example make it two hours longer
+             alert("I just got resized!");
+        },
+        eventDrop: function( event, jsEvent, ui, view ) {
+
+            // Code when you drop an element somewhere else
+            alert("I'm somewhere else now");
+        }
+        //defaultView : 'agendaSixDay'
+    })
+    $('#calendar_ug3').fullCalendar( 'gotoDate', '2000-01-01');
+
+    var ug4_calendar = $('#calendar_ug4').fullCalendar({
+        // put your options and callbacks here
+        header: { // Display nothing at the top
+            left: '',
+            center: '',
+            right: ''
+        },
+        //eventSources: ['events.php'],
+        theme: true,
+        height: 520, // Fix height
+        columnFormat: 'dddd', // Display just full length of weekday, without dates
+        defaultView: 'agendaWeek', // display week view
+        hiddenDays: [0,], // hide Saturday and Sunday
+        weekNumbers:  false, // don't show week numbers
+        minTime: '8:30:00', // display from 16 to
+        maxTime: '19:00:00', // 23
+        slotDuration: '00:30:00', // 15 minutes for each row
+        allDaySlot: false, // don't show "all day" at the top
+        select: function(start, end, allDay) {
+             // Code for creating new events.
+             alert("Create new event at " + start);
+        },
+        eventResize: function( event, delta, revertFunc, jsEvent, ui, view ) {
+             // Code when you resize an event (for example make it two hours longer
+             alert("I just got resized!");
+        },
+        eventDrop: function( event, jsEvent, ui, view ) {
+
+            // Code when you drop an element somewhere else
+            alert("I'm somewhere else now");
+        }
+        //defaultView : 'agendaSixDay'
+    })
+    $('#calendar_ug4').fullCalendar( 'gotoDate', '2000-01-01');
+
+  });
+
+  </script>
+
+  <style>
+
+	body {
+		margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+	}
+
+	#wrap {
+		width: 1100px;
+		margin: 0 auto;
+	}
+
+	#external-events {
+		float: left;
+		width: 150px;
+		padding: 0 10px;
+		border: 1px solid #ccc;
+		background: #eee;
+		text-align: left;
+	}
+
+	#external-events h4 {
+		font-size: 16px;
+		margin-top: 0;
+		padding-top: 1em;
+	}
+
+	#external-events .fc-event {
+		margin: 10px 0;
+		cursor: pointer;
+	}
+
+	#external-events p {
+		margin: 1.5em 0;
+		font-size: 11px;
+		color: #666;
+	}
+
+	#external-events p input {
+		margin: 0;
+		vertical-align: middle;
+	}
+
+	.calendar {
+		width: 900px;
+        float: right;
+		margin: 0 auto;
+	}
+
+</style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h3>UG1 Timetable</h3>
+        <div class='row well'>
+    		<div id='external-events' class="col-md-3">
+    			<h4>Draggable Events</h4>
+    			<div class='fc-event'>My Event 1</div>
+    			<div class='fc-event'>My Event 2</div>
+    			<div class='fc-event'>My Event 3</div>
+    			<div class='fc-event'>My Event 4</div>
+    			<div class='fc-event'>My Event 5</div>
+    			<p>
+    				<input type='checkbox' id='drop-remove' />
+    				<label for='drop-remove'>remove after drop</label>
+    			</p>
+    		</div>
+            <div id='calendar_ug1' class="calendar col-md-9"></div>
+            <!--<div style='clear:both'></div>-->
+        </div>
+    </div>
+
+    <div>
+        <h3>UG2 Timetable</h3>
+        <div id='wrap'>
+    		<div id='external-events'>
+    			<h4>Draggable Events</h4>
+    			<div class='fc-event'>My Event 1</div>
+    			<div class='fc-event'>My Event 2</div>
+    			<div class='fc-event'>My Event 3</div>
+    			<div class='fc-event'>My Event 4</div>
+    			<div class='fc-event'>My Event 5</div>
+    			<p>
+    				<input type='checkbox' id='drop-remove' />
+    				<label for='drop-remove'>remove after drop</label>
+    			</p>
+    		</div>
+            <div id='calendar_ug2' class="calendar"></div>
+            <div style='clear:both'></div>
+        </div>
+    </div>
+
+    <div>
+        <h3>UG3 Timetable</h3>
+        <div id='wrap'>
+    		<div id='external-events'>
+    			<h4>Draggable Events</h4>
+    			<div class='fc-event'>My Event 1</div>
+    			<div class='fc-event'>My Event 2</div>
+    			<div class='fc-event'>My Event 3</div>
+    			<div class='fc-event'>My Event 4</div>
+    			<div class='fc-event'>My Event 5</div>
+    			<p>
+    				<input type='checkbox' id='drop-remove' />
+    				<label for='drop-remove'>remove after drop</label>
+    			</p>
+    		</div>
+            <div id='calendar_ug3' class="calendar"></div>
+            <div style='clear:both'></div>
+        </div>
+    </div>
+
+    <div>
+        <h3>UG4 Timetable</h3>
+        <div id='wrap'>
+    		<div id='external-events'>
+    			<h4>Draggable Events</h4>
+    			<div class='fc-event'>My Event 1</div>
+    			<div class='fc-event'>My Event 2</div>
+    			<div class='fc-event'>My Event 3</div>
+    			<div class='fc-event'>My Event 4</div>
+    			<div class='fc-event'>My Event 5</div>
+    			<p>
+    				<input type='checkbox' id='drop-remove' />
+    				<label for='drop-remove'>remove after drop</label>
+    			</p>
+    		</div>
+            <div id='calendar_ug4' class="calendar"></div>
+            <div style='clear:both'></div>
+        </div>
+    </div>
+
+</body>
