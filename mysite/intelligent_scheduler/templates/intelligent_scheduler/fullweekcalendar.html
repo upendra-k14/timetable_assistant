@@ -111,8 +111,9 @@
             center: '',
             right: ''
         },
-        //eventSources: ['events.php'],
         theme: true,
+        //aspectRatio: 2.44,
+        //eventSources: ['events.php'],
         height: 520, // Fix height
         columnFormat: 'dddd', // Display just full length of weekday, without dates
         defaultView: 'agendaWeek', // display week view
@@ -122,10 +123,28 @@
         maxTime: '19:00:00', // 23
         slotDuration: '00:30:00', // 15 minutes for each row
         allDaySlot: false, // don't show "all day" at the top
-        select: function(start, end, allDay) {
+        selectable: true,
+        editable: true,
+        defaultDate: '2016-09-12',
+        droppable: true, // this allows things to be dropped onto the calendar
+        selectHelper: true,
+		select: function(start, end) {
+			var title = prompt('Event Title:');
+			var eventData;
+			if (title) {
+				eventData = {
+					title: title,
+					start: start,
+					end: end
+				};
+				$('#calendar_ug2').fullCalendar('renderEvent', eventData, true); // stick? = true
+			}
+			$('#calendar_ug2').fullCalendar('unselect');
+		},
+        //select: function(start, end, allDay) {
              // Code for creating new events.
-             alert("Create new event at " + start);
-        },
+        //     alert("Create new event at " + start);
+        //},
         eventResize: function( event, delta, revertFunc, jsEvent, ui, view ) {
              // Code when you resize an event (for example make it two hours longer
              alert("I just got resized!");
@@ -134,10 +153,16 @@
 
             // Code when you drop an element somewhere else
             alert("I'm somewhere else now");
-        }
+        },
+		drop: function() {
+			// is the "remove after drop" checkbox checked?
+			if ($('#drop-remove').is(':checked')) {
+				// if so, remove the element from the "Draggable Events" list
+				$(this).remove();
+			}
+		}
         //defaultView : 'agendaSixDay'
     })
-    $('#calendar_ug2').fullCalendar( 'gotoDate', '2000-01-01');
 
     var ug3_calendar = $('#calendar_ug3').fullCalendar({
         // put your options and callbacks here
@@ -146,8 +171,9 @@
             center: '',
             right: ''
         },
-        //eventSources: ['events.php'],
         theme: true,
+        //aspectRatio: 2.44,
+        //eventSources: ['events.php'],
         height: 520, // Fix height
         columnFormat: 'dddd', // Display just full length of weekday, without dates
         defaultView: 'agendaWeek', // display week view
@@ -157,10 +183,28 @@
         maxTime: '19:00:00', // 23
         slotDuration: '00:30:00', // 15 minutes for each row
         allDaySlot: false, // don't show "all day" at the top
-        select: function(start, end, allDay) {
+        selectable: true,
+        editable: true,
+        defaultDate: '2016-09-12',
+        droppable: true, // this allows things to be dropped onto the calendar
+        selectHelper: true,
+		select: function(start, end) {
+			var title = prompt('Event Title:');
+			var eventData;
+			if (title) {
+				eventData = {
+					title: title,
+					start: start,
+					end: end
+				};
+				$('#calendar_ug3').fullCalendar('renderEvent', eventData, true); // stick? = true
+			}
+			$('#calendar_ug3').fullCalendar('unselect');
+		},
+        //select: function(start, end, allDay) {
              // Code for creating new events.
-             alert("Create new event at " + start);
-        },
+        //     alert("Create new event at " + start);
+        //},
         eventResize: function( event, delta, revertFunc, jsEvent, ui, view ) {
              // Code when you resize an event (for example make it two hours longer
              alert("I just got resized!");
@@ -169,10 +213,16 @@
 
             // Code when you drop an element somewhere else
             alert("I'm somewhere else now");
-        }
+        },
+		drop: function() {
+			// is the "remove after drop" checkbox checked?
+			if ($('#drop-remove').is(':checked')) {
+				// if so, remove the element from the "Draggable Events" list
+				$(this).remove();
+			}
+		}
         //defaultView : 'agendaSixDay'
     })
-    $('#calendar_ug3').fullCalendar( 'gotoDate', '2000-01-01');
 
     var ug4_calendar = $('#calendar_ug4').fullCalendar({
         // put your options and callbacks here
@@ -181,8 +231,9 @@
             center: '',
             right: ''
         },
-        //eventSources: ['events.php'],
         theme: true,
+        //aspectRatio: 2.44,
+        //eventSources: ['events.php'],
         height: 520, // Fix height
         columnFormat: 'dddd', // Display just full length of weekday, without dates
         defaultView: 'agendaWeek', // display week view
@@ -192,10 +243,28 @@
         maxTime: '19:00:00', // 23
         slotDuration: '00:30:00', // 15 minutes for each row
         allDaySlot: false, // don't show "all day" at the top
-        select: function(start, end, allDay) {
+        selectable: true,
+        editable: true,
+        defaultDate: '2016-09-12',
+        droppable: true, // this allows things to be dropped onto the calendar
+        selectHelper: true,
+		select: function(start, end) {
+			var title = prompt('Event Title:');
+			var eventData;
+			if (title) {
+				eventData = {
+					title: title,
+					start: start,
+					end: end
+				};
+				$('#calendar_ug4').fullCalendar('renderEvent', eventData, true); // stick? = true
+			}
+			$('#calendar_ug4').fullCalendar('unselect');
+		},
+        //select: function(start, end, allDay) {
              // Code for creating new events.
-             alert("Create new event at " + start);
-        },
+        //     alert("Create new event at " + start);
+        //},
         eventResize: function( event, delta, revertFunc, jsEvent, ui, view ) {
              // Code when you resize an event (for example make it two hours longer
              alert("I just got resized!");
@@ -204,10 +273,16 @@
 
             // Code when you drop an element somewhere else
             alert("I'm somewhere else now");
-        }
+        },
+		drop: function() {
+			// is the "remove after drop" checkbox checked?
+			if ($('#drop-remove').is(':checked')) {
+				// if so, remove the element from the "Draggable Events" list
+				$(this).remove();
+			}
+		}
         //defaultView : 'agendaSixDay'
     })
-    $('#calendar_ug4').fullCalendar( 'gotoDate', '2000-01-01');
 
   });
 
@@ -275,11 +350,11 @@
         <div class='row well'>
     		<div id='external-events' class="col-md-3">
     			<h4>Draggable Events</h4>
-    			<div class='fc-event'>My Event 1</div>
-    			<div class='fc-event'>My Event 2</div>
-    			<div class='fc-event'>My Event 3</div>
-    			<div class='fc-event'>My Event 4</div>
-    			<div class='fc-event'>My Event 5</div>
+    			<div class='fc-event'>Course 1</div>
+    			<div class='fc-event'>Course 2</div>
+    			<div class='fc-event'>Course 3</div>
+    			<div class='fc-event'>Course 4</div>
+    			<div class='fc-event'>Course 5</div>
     			<p>
     				<input type='checkbox' id='drop-remove' />
     				<label for='drop-remove'>remove after drop</label>
@@ -290,63 +365,63 @@
         </div>
     </div>
 
-    <div>
+    <div class="container">
         <h3>UG2 Timetable</h3>
-        <div id='wrap'>
-    		<div id='external-events'>
+        <div class='row well'>
+    		<div id='external-events' class="col-md-3">
     			<h4>Draggable Events</h4>
-    			<div class='fc-event'>My Event 1</div>
-    			<div class='fc-event'>My Event 2</div>
-    			<div class='fc-event'>My Event 3</div>
-    			<div class='fc-event'>My Event 4</div>
-    			<div class='fc-event'>My Event 5</div>
+    			<div class='fc-event'>Course 1</div>
+    			<div class='fc-event'>Course 2</div>
+    			<div class='fc-event'>Course 3</div>
+    			<div class='fc-event'>Course 4</div>
+    			<div class='fc-event'>Course 5</div>
     			<p>
     				<input type='checkbox' id='drop-remove' />
     				<label for='drop-remove'>remove after drop</label>
     			</p>
     		</div>
-            <div id='calendar_ug2' class="calendar"></div>
-            <div style='clear:both'></div>
+            <div id='calendar_ug2' class="calendar col-md-9"></div>
+            <!--<div style='clear:both'></div>-->
         </div>
     </div>
 
-    <div>
+    <div class="container">
         <h3>UG3 Timetable</h3>
-        <div id='wrap'>
-    		<div id='external-events'>
+        <div class='row well'>
+    		<div id='external-events' class="col-md-3">
     			<h4>Draggable Events</h4>
-    			<div class='fc-event'>My Event 1</div>
-    			<div class='fc-event'>My Event 2</div>
-    			<div class='fc-event'>My Event 3</div>
-    			<div class='fc-event'>My Event 4</div>
-    			<div class='fc-event'>My Event 5</div>
+    			<div class='fc-event'>Course 1</div>
+    			<div class='fc-event'>Course 2</div>
+    			<div class='fc-event'>Course 3</div>
+    			<div class='fc-event'>Course 4</div>
+    			<div class='fc-event'>Course 5</div>
     			<p>
     				<input type='checkbox' id='drop-remove' />
     				<label for='drop-remove'>remove after drop</label>
     			</p>
     		</div>
-            <div id='calendar_ug3' class="calendar"></div>
-            <div style='clear:both'></div>
+            <div id='calendar_ug3' class="calendar col-md-9"></div>
+            <!--<div style='clear:both'></div>-->
         </div>
     </div>
 
-    <div>
+    <div class="container">
         <h3>UG4 Timetable</h3>
-        <div id='wrap'>
-    		<div id='external-events'>
+        <div class='row well'>
+    		<div id='external-events' class="col-md-3">
     			<h4>Draggable Events</h4>
-    			<div class='fc-event'>My Event 1</div>
-    			<div class='fc-event'>My Event 2</div>
-    			<div class='fc-event'>My Event 3</div>
-    			<div class='fc-event'>My Event 4</div>
-    			<div class='fc-event'>My Event 5</div>
+    			<div class='fc-event'>Course 1</div>
+    			<div class='fc-event'>Course 2</div>
+    			<div class='fc-event'>Course 3</div>
+    			<div class='fc-event'>Course 4</div>
+    			<div class='fc-event'>Course 5</div>
     			<p>
     				<input type='checkbox' id='drop-remove' />
     				<label for='drop-remove'>remove after drop</label>
     			</p>
     		</div>
-            <div id='calendar_ug4' class="calendar"></div>
-            <div style='clear:both'></div>
+            <div id='calendar_ug4' class="calendar col-md-9"></div>
+            <!--<div style='clear:both'></div>-->
         </div>
     </div>
 
