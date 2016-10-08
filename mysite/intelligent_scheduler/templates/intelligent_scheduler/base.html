@@ -12,9 +12,6 @@
     <!-- Bootstrap Core CSS -->
     <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/bootstrap.min.css' %}" />
 
-    <!-- Custom CSS -->
-    <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/simple-sidebar.css' %}" />
-
     {% block head_content %}
     {% endblock %}
 
@@ -33,10 +30,10 @@
     {% endblock %}
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <!--<script src="{% static 'intelligent_scheduler/js/jquery.js' %}"></script>-->
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{% static 'intelligent_scheduler/js/bootstrap.min.js' %}"></script>
 
     <!-- Menu Toggle Script -->
     <script>

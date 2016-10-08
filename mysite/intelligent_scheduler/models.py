@@ -1,5 +1,12 @@
-from django.db.models import *
+#!/usr/bin/env python3
+
+from django.db.models import Model
+from django.db.models import CharField, IntegerField, BooleanField
+from django.db.models import TimeField, DurationField
+from django.db.models import ForeignKey
+from django.db.models import CASCADE
 from intelligent_scheduler.config import model_choices
+
 
 class Courses(Model):
     cid = CharField(max_length=10, primary_key=True)
@@ -13,7 +20,8 @@ class Courses(Model):
     expectedstrength = IntegerField(default=50)
 
     def __str__(self):
-        return '{} {} [{}]'.format(self.cid,self.cname,self.cshortname)
+        return '{} {} [{}]'.format(self.cid, self.cname, self.cshortname)
+
 
 class Faculty(Model):
     fname = CharField(max_length=100)
@@ -21,7 +29,8 @@ class Faculty(Model):
     isvisiting = BooleanField(default=False)
 
     def __str__(self):
-        return '{} [{}]'.format(self.fname,self.fshortname)
+        return '{} [{}]'.format(self.fname, self.fshortname)
+
 
 class PreferredFacultyHours(Model):
     fid = ForeignKey(
@@ -35,14 +44,16 @@ class PreferredFacultyHours(Model):
     endtime = TimeField()
 
     def __str__(self):
-        return '{} {}'.format(str(self.fid),str(self.preferred_day))
+        return '{} {}'.format(str(self.fid), str(self.preferred_day))
+
 
 class Rooms(Model):
     roomid = IntegerField(primary_key=True)
     max_strength = IntegerField(default=50)
 
     def __str__(self):
-        return '{} {}'.format(str(self.roomid),self.max_strength)
+        return '{} {}'.format(str(self.roomid), self.max_strength)
+
 
 class Student(Model):
     rollnumber = CharField(max_length=12, primary_key=True)
@@ -58,6 +69,7 @@ class Student(Model):
     def __str__(self):
         return str(self.rollnumber)
 
+
 class CourseTaken(Model):
     rollnumber = ForeignKey(
         'Student',
@@ -67,10 +79,11 @@ class CourseTaken(Model):
         on_delete=CASCADE)
 
     class Meta:
-        unique_together = ('rollnumber','cid')
+        unique_together = ('rollnumber', 'cid')
 
     def __str__(self):
-        return '{} {}'.format(str(self.rollnumber),str(self.cid))
+        return '{} {}'.format(str(self.rollnumber), str(self.cid))
+
 
 class TeachingAssistant(Model):
     rollnumber = ForeignKey(
@@ -81,10 +94,11 @@ class TeachingAssistant(Model):
         on_delete=CASCADE)
 
     class Meta:
-        unique_together = ('rollnumber','cid')
+        unique_together = ('rollnumber', 'cid')
 
     def __str__(self):
-        return '{} {}'.format(str(self.rollnumber),str(self.cid))
+        return '{} {}'.format(str(self.rollnumber), str(self.cid))
+
 
 class ClassDuration(Model):
     batch = CharField(
@@ -95,7 +109,8 @@ class ClassDuration(Model):
     duration = DurationField()
 
     def __str__(self):
-        return '{} {}'.format(str(self.batch),str(self.duration))
+        return '{} {}'.format(str(self.batch), str(self.duration))
+
 
 class CourseType(Model):
     cid = ForeignKey(
@@ -114,10 +129,14 @@ class CourseType(Model):
         choices=model_choices['COURSE_TYPE'])
 
     class Meta:
-        unique_together = ('cid','batch','branch')
+        unique_together = ('cid', 'batch', 'branch')
 
     def __str__(self):
-        return '{} {} {}'.format(str(self.cid),str(self.batch),str(self.branch))
+        return '{} {} {}'.format(
+            str(self.cid),
+            str(self.batch),
+            str(self.branch))
+
 
 class LunchBreak(Model):
     batch = CharField(

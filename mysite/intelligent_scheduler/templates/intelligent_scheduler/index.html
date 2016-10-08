@@ -3,78 +3,144 @@
 
 
 {% block page_title %}
-    <title>IIITS Timetable Assistant</title>
+<title>IIITS Timetable Assistant</title>
 {% endblock %}
 
 
-{% block header_content %}
-    <link rel='stylesheet' href="{% static 'intelligent_scheduler/fullcalendar/fullcalendar.css' %}" />
-    <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/fullcalendar/lib/cupertino/jquery-ui.min.css' %}"/>
-    <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/bootstrap.min.css' %}" />
-    <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/bootstrap-responsive.min.css' %}" />
+{% block head_content %}
+<link rel='stylesheet' href="{% static 'intelligent_scheduler/fullcalendar/fullcalendar.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/fullcalendar/lib/cupertino/jquery-ui.min.css' %}"/>
+<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/bootstrap.min.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/bootstrap-responsive.min.css' %}" />
 
-    <script src="{% static 'intelligent_scheduler/fullcalendar/lib/jquery.min.js' %}"></script>
-    <script src="{% static 'intelligent_scheduler/fullcalendar/lib/jquery-ui.min.js' %}"></script>
-    <script src="{% static 'intelligent_scheduler/fullcalendar/lib/moment.min.js' %}"></script>
-    <script src="{% static 'intelligent_scheduler/fullcalendar/fullcalendar.min.js' %}"></script>
+<!-- Custom CSS -->
+<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/fancysidebar.css' %}" />
 
-    <script src="{% static 'intelligent_scheduler/js/ugtimetable.js' %}"></script>
-    <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/base1.css' %}" />
+<script src="{% static 'intelligent_scheduler/fullcalendar/lib/jquery.min.js' %}"></script>
+<script src="{% static 'intelligent_scheduler/fullcalendar/lib/jquery-ui.min.js' %}"></script>
+<script src="{% static 'intelligent_scheduler/fullcalendar/lib/moment.min.js' %}"></script>
+<script src="{% static 'intelligent_scheduler/fullcalendar/fullcalendar.min.js' %}"></script>
+
+<script src="{% static 'intelligent_scheduler/js/ugtimetable.js' %}"></script>
+<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/base1.css' %}" />
+
+
 {% endblock %}
 
 
 {% block body_content %}
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
+    <div class="overlay"></div>
 
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Simple Sidebar</h1>
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Course Slots
+                </a>
+            </li>
 
-                        <div id='calendar_ug1' class="calendar col-md-9"></div>
+            {% if ug4_cse_courses %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">UG4 Courses <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li></li>
+                    {% for courses in ug4_cse_courses %}
+                        <li id='external-events'><a href="#" class="fc-event" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
+                    {% endfor %}
+                    <li>
+                        <a href="#">
+                            <input type='checkbox' id='drop-remove' />
+                            <label for='drop-remove'>remove after drop</label>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
 
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+            {% if ug3_cse_courses %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">UG3 Courses <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li></li>
+                    {% for courses in ug3_cse_courses %}
+                        <li id='external-events'><a href="#" class="fc-event" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
+                    {% endfor %}
+                    <li>
+                        <a href="#">
+                            <input type='checkbox' id='drop-remove' />
+                            <label for='drop-remove'>remove after drop</label>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+
+            {% if ug2_courses %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">UG2 Courses <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li></li>
+                    {% for courses in ug2_courses %}
+                        <li id='external-events'><a href="#" class="fc-event" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
+                    {% endfor %}
+                    <li>
+                        <a href="#">
+                            <input type='checkbox' id='drop-remove' />
+                            <label for='drop-remove'>remove after drop</label>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+
+            {% if ug1_courses %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">UG1 Courses <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li></li>
+                    {% for courses in ug1_courses %}
+                        <li id='external-events'><a href="#" class="fc-event" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
+                    {% endfor %}
+                    <li>
+                        <a href="#">
+                            <input type='checkbox' id='drop-remove' />
+                            <label for='drop-remove'>remove after drop</label>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+        </button>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 calendarbox">
+                    <div class="row well calendar">
+                        <h3 >UG4 Timetable</h3>
+                        <div id='calendar_ug1'>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
-
     </div>
-    <!-- /#wrapper -->
+
+
+</div>
+
 {% endblock %}
