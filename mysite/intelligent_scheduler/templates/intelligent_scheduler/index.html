@@ -8,21 +8,32 @@
 
 
 {% block head_content %}
-<link rel='stylesheet' href="{% static 'intelligent_scheduler/fullcalendar/fullcalendar.css' %}" />
+<!--<link rel='stylesheet' href="{% static 'intelligent_scheduler/fullcalendar/fullcalendar.css' %}" />
 <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/fullcalendar/lib/cupertino/jquery-ui.min.css' %}"/>
 <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/bootstrap.min.css' %}" />
-<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/bootstrap-responsive.min.css' %}" />
 
-<!-- Custom CSS -->
-<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/fancysidebar.css' %}" />
 
 <script src="{% static 'intelligent_scheduler/fullcalendar/lib/jquery.min.js' %}"></script>
 <script src="{% static 'intelligent_scheduler/fullcalendar/lib/jquery-ui.min.js' %}"></script>
 <script src="{% static 'intelligent_scheduler/fullcalendar/lib/moment.min.js' %}"></script>
 <script src="{% static 'intelligent_scheduler/fullcalendar/fullcalendar.min.js' %}"></script>
 
+
+<script src="{% static 'intelligent_scheduler/js/bootstrap.min.js' %}"></script>-->
+<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/jsfiddle/bootstrap.min.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/jsfiddle/fullcalendar.min.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/jsfiddle/jquery-ui.css' %}" />
+
+<script src="{% static 'intelligent_scheduler/jsfiddle/jquery.min.js' %}"></script>
+<script src="{% static 'intelligent_scheduler/jsfiddle/jquery-ui.min.js' %}"></script>
+<script src="{% static 'intelligent_scheduler/jsfiddle/bootstrap.min.js' %}"></script>
+<script src="{% static 'intelligent_scheduler/jsfiddle/moment.min.js' %}"></script>
+<script src="{% static 'intelligent_scheduler/jsfiddle/fullcalendar.min.js' %}"></script>
+
+
 <script src="{% static 'intelligent_scheduler/js/ugtimetable.js' %}"></script>
 <link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/base1.css' %}" />
+<link rel='stylesheet' type='text/css' href="{% static 'intelligent_scheduler/css/fancysidebar.css' %}" />
 
 
 {% endblock %}
@@ -48,12 +59,12 @@
                 <ul class="dropdown-menu" role="menu">
                     <li></li>
                     {% for courses in ug4_cse_courses %}
-                        <li id='external-events'><a href="#" class="fc-event" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
+                        <li id='external-events'><a href="#" class="fc-event4" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
                     {% endfor %}
                     <li>
                         <a href="#">
-                            <input type='checkbox' id='drop-remove' />
-                            <label for='drop-remove'>remove after drop</label>
+                            <input type='checkbox' id='drop-remove4' />
+                            <label for='drop-remove4'>remove after drop</label>
                         </a>
                     </li>
                 </ul>
@@ -66,12 +77,12 @@
                 <ul class="dropdown-menu" role="menu">
                     <li></li>
                     {% for courses in ug3_cse_courses %}
-                        <li id='external-events'><a href="#" class="fc-event" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
+                        <li id='external-events'><a href="#" class="fc-event3" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
                     {% endfor %}
                     <li>
                         <a href="#">
-                            <input type='checkbox' id='drop-remove' />
-                            <label for='drop-remove'>remove after drop</label>
+                            <input type='checkbox' id='drop-remove3' />
+                            <label for='drop-remove3'>remove after drop</label>
                         </a>
                     </li>
                 </ul>
@@ -84,12 +95,12 @@
                 <ul class="dropdown-menu" role="menu">
                     <li></li>
                     {% for courses in ug2_courses %}
-                        <li id='external-events'><a href="#" class="fc-event" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
+                        <li id='external-events'><a href="#" class="fc-event2" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
                     {% endfor %}
                     <li>
                         <a href="#">
-                            <input type='checkbox' id='drop-remove' />
-                            <label for='drop-remove'>remove after drop</label>
+                            <input type='checkbox' id='drop-remove2' />
+                            <label for='drop-remove2'>remove after drop</label>
                         </a>
                     </li>
                 </ul>
@@ -102,12 +113,12 @@
                 <ul class="dropdown-menu" role="menu">
                     <li></li>
                     {% for courses in ug1_courses %}
-                        <li id='external-events'><a href="#" class="fc-event" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
+                        <li id='external-events'><a href="#" class="fc-event1" id="{{ courses.courseid }}">{{courses.coursename}} {{courses.coursehortname}}</a></li>
                     {% endfor %}
                     <li>
                         <a href="#">
-                            <input type='checkbox' id='drop-remove' />
-                            <label for='drop-remove'>remove after drop</label>
+                            <input type='checkbox' id='drop-remove1' />
+                            <label for='drop-remove1'>remove after drop</label>
                         </a>
                     </li>
                 </ul>
@@ -128,16 +139,49 @@
         </button>
 
         <div class="container-fluid">
+
             <div class="row">
                 <div class="col-lg-12 calendarbox">
                     <div class="row well calendar">
                         <h3 >UG4 Timetable</h3>
-                        <div id='calendar_ug1'>
+                        <div id='calendarug4'>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-12 calendarbox">
+                    <div class="row well calendar">
+                        <h3 >UG3 Timetable</h3>
+                        <div id='calendarug3'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 calendarbox">
+                    <div class="row well calendar">
+                        <h3 >UG2 Timetable</h3>
+                        <div id='calendarug2'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 calendarbox">
+                    <div class="row well calendar">
+                        <h3 >UG1 Timetable</h3>
+                        <div id='calendarug1'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
     </div>
 
 
